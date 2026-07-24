@@ -35,6 +35,14 @@ const _RIDENT = new THREE.Quaternion();
 const ARM_REST = 0.55;
 const HIP_SWING = 0.5;      // radians per side at full stride
 
+// Which way a body topples. The rig's facing vector is (sin y, 0, cos y), i.e.
+// forward is +Z, so a POSITIVE pitch about the local X axis carries the head
+// forward and lays the character face-down.
+const DEATH_PITCH = Math.PI / 2;
+// Half a torso's thickness. The topple pivots at the feet, so without this the
+// body comes to rest with its lower half inside the ground.
+const LIE_LIFT = 0.19;
+
 export class CharacterAnimator {
   constructor(root, opts = {}) {
     this.root = root;
@@ -74,7 +82,10 @@ export class CharacterAnimator {
     this._runF = 0;
     this._runHoldsOn = false;
     import('./Poses.js').then(({ loadPoses, poseHolds }) => loadPoses().then((p) => {
-      if (!p.Running || !p.Running_caMid) return;
+      // The passing pose has been authored under a couple of names; accept both
+      // rather than silently dropping to the procedural gait when it is renamed.
+      const mid = p.Running_Mid ?? p.Running_caMid;
+      if (!p.Running || !mid) { console.warn('[anim] no authored run cycle — using procedural gait'); return; }
       const mirror = (pose) => {
         const out = {};
         for (const [n, q] of Object.entries(pose)) {
@@ -83,7 +94,7 @@ export class CharacterAnimator {
         }
         return out;
       };
-      const k0 = poseHolds(p.Running), k1 = poseHolds(p.Running_caMid);
+      const k0 = poseHolds(p.Running), k1 = poseHolds(mid);
       this._runKeys = [k0, k1, mirror(k0), mirror(k1)];
       this._runBones = new Set(this._runKeys.flatMap((k) => Object.keys(k)));
     })).catch(() => {});
@@ -107,9 +118,10 @@ export class CharacterAnimator {
     const rig = this.rig;
     const { right, up, forward } = rig.frame;
 
+    const dying = this.action?.type === 'death';
     this._base(rig, right, up, forward);
     this._locomotion(rig, dt, right, up, forward);
-    this._idle(rig, t, right, up, forward);
+    if (!dying) this._idle(rig, t, right, up, forward);   // corpses do not breathe
 
     this.gesture = THREE.MathUtils.damp(this.gesture, this.speaking ? 1 : 0, 6, dt);
     if (this.gesture > 0.01) this._gestures(rig, t, right, up, forward);
@@ -145,7 +157,10 @@ export class CharacterAnimator {
       return;
     }
 
-    const PH = [0, 0.21, 0.5, 0.71];
+    // Contact, passing, mirrored contact, mirrored passing — evenly spaced, so
+    // no segment is compressed against its neighbour (uneven spacing was part
+    // of what made the stride read as janky).
+    const PH = [0, 0.25, 0.5, 0.75];
     const phase = ((this.walkPhase / (Math.PI * 2)) % 1 + 1) % 1;
     let i = 3;
     for (let k = 0; k < 4; k++) if (phase >= PH[k]) i = k;
@@ -230,8 +245,11 @@ export class CharacterAnimator {
     rig.add(BONES.spine[2], up, -Math.sin(p) * 0.07 * amp * sway);
     rig.add(BONES.spine[1], right, lean * amp * proc);
 
-    // Vertical bob, twice per stride. Applied to the root, not a bone.
-    const bob = Math.sin(p * 2) * (running ? 0.055 : 0.022) * amp;
+    // Vertical bob, twice per stride — but ONLY for the procedural walk. The
+    // authored run poses already carry their own rise and fall through the hips
+    // and knees, so adding a sine on the root on top of them double-bounces the
+    // whole character. It fades out with the rest of the procedural gait.
+    const bob = Math.sin(p * 2) * (running ? 0.055 : 0.022) * amp * proc;
     this.root.position.y = (this.root.userData.groundY ?? 0) + bob;
   }
 
@@ -338,16 +356,48 @@ export class CharacterAnimator {
         break;
       }
       case 'death': {
-        const f = Math.min(1, k * 1.2);
-        const e = f * f;
-        rig.add(BONES.spine[1], right, e * 1.1);
-        rig.add(BONES.spine[2], right, e * 0.8);
-        rig.add(BONES.head, right, e * 0.5);
-        rig.add(BONES.upperLegL, right, -e * 0.9);
-        rig.add(BONES.upperLegR, right, -e * 0.7);
-        rig.add(BONES.lowerLegL, right, -e * 1.2);
-        rig.add(BONES.lowerLegR, right, -e * 1.0);
-        if (k >= 1) this.action = { type: 'death', t: 0, duration: Infinity };
+        // A death runs on its own clock, not the action's `k`. The action used
+        // to be re-armed with an Infinite duration once it finished, which sent
+        // k back to 0 and un-crumpled the corpse — so the body sprang upright
+        // and stood there. This timer only ever moves forward.
+        this._deathT = (this._deathT ?? 0) + dt;
+        const td = this._deathT;
+        const f = Math.min(1, td / 0.9);
+        const fall = f * f;                       // accelerating, like a drop
+
+        // The knees buckle hardest halfway down and then relax as the body
+        // lands — holding the full buckle left a corpse folded double with its
+        // heels in the air instead of lying out flat.
+        const buckle = Math.sin(f * Math.PI * 0.9) * 0.7 + fall * 0.2;
+        rig.add(BONES.spine[1], right, buckle * 0.8);
+        rig.add(BONES.spine[2], right, buckle * 0.55);
+        rig.add(BONES.head, right, buckle * 0.4);
+        rig.add(BONES.upperLegL, right, -buckle * 0.9);
+        rig.add(BONES.upperLegR, right, -buckle * 0.7);
+        rig.add(BONES.lowerLegL, right, -buckle * 1.1);
+        rig.add(BONES.lowerLegR, right, -buckle * 0.9);
+        // Arms fall out from the body rather than staying at the sides.
+        rig.add(BONES.upperArmL, forward, -fall * 0.35);
+        rig.add(BONES.upperArmR, forward, fall * 0.35);
+
+        // …and the body itself topples over and stays down. Pivoting at the
+        // root (the feet) swings the torso to the ground like a felled tree;
+        // the damped wobble after landing keeps it from stopping dead.
+        const root = this.root;
+        root.rotation.order = 'YXZ';              // yaw first, then the topple
+        this._deathRoll ??= (Math.random() - 0.5) * 0.3;
+        const bounce = td > 0.9 ? Math.sin((td - 0.9) * 11) * Math.exp(-(td - 0.9) * 7) * 0.06 : 0;
+        root.rotation.x = DEATH_PITCH * fall + bounce;
+        root.rotation.z = this._deathRoll * fall;
+        // The topple pivots at the root, which sits between the feet — so a body
+        // laid flat at ground height ends up half-sunk in the turf. Lift it by
+        // roughly half a torso as it goes down so it comes to rest ON the
+        // ground. Height is released once settled, letting the game sink the
+        // corpse later when it turns the spot into a grave.
+        if (fall < 1) {
+          const ground = root.userData.groundY ?? root.position.y;
+          root.position.y = ground + 0.05 * (1 - fall) + LIE_LIFT * fall;
+        }
         break;
       }
     }

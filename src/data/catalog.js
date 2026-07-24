@@ -186,6 +186,8 @@ export const PROPS = {
   'rune-stone':     { src: 'rune-stone',    scale: 1.26, metres: 2.4, tags: ['landmark', 'lore', 'wildlands', 'exterior'] },
   'crates':         { src: 'crates',        scale: 0.9,  metres: 1.7, tags: ['prop', 'container', 'waterfront', 'exterior'] },
   'sign-post':      { src: 'sign-post',     scale: 1.58, metres: 3.0, tags: ['prop', 'town', 'exterior'] },
+  // Marks where someone fell — spawned at runtime once a body has settled.
+  'gravestone':     { src: 'gravestone',    scale: 0.58, metres: 1.1, tags: ['prop', 'grave', 'exterior'] },
 
 };
 

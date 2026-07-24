@@ -13,11 +13,16 @@ import { DialogueRunner } from './Dialogue.js';
 import { UI } from '../ui/UI.js';
 import { NPCS, CREATURE_SPAWNS } from '../data/npcs.js';
 import { InteriorSet, INTERIORS } from '../world/Interior.js';
-import { updateLODs } from '../core/Assets.js';
+import { assets, updateLODs } from '../core/Assets.js';
 import { QuestMarkers } from './QuestMarkers.js';
+import { PROPS } from '../data/catalog.js';
 
 const INTERACT_RANGE = 3.4;
 const ATTACK_RANGE = 2.6;
+// How long a body lies there before the ground takes it, and how long the
+// sinking itself lasts. Long enough to walk over and loot what fell.
+const GRAVE_DELAY = 12;
+const GRAVE_SINK = 2.0;
 const DOOR_RANGE = 3.2;
 // The doorway is always +Z in room-local space, so leaving is a fixed test.
 // Interior drops the player at d/2 - 1.4, which is *inside* this band: without
@@ -470,6 +475,62 @@ export class Game {
   }
 
   /**
+   * The dead settle, sink into the ground, and leave a headstone behind.
+   *
+   * Bodies are lootable for a while first; whatever is left on one moves to the
+   * grave, so nothing is lost by waiting. Creatures are left out — a wraith does
+   * not get a Christian burial.
+   */
+  _updateGraves(dt) {
+    for (const npc of this.npcs) {
+      const ch = npc.char;
+      if (!ch?.dead || npc._grave === 'done' || npc._grave === 'pending') continue;
+
+      npc._deadFor = (npc._deadFor ?? 0) + dt;
+      if (npc._deadFor < GRAVE_DELAY) continue;
+
+      const sink = Math.min(1, (npc._deadFor - GRAVE_DELAY) / GRAVE_SINK);
+      // Sink from where the body actually came to rest, not from the ground
+      // plane — the corpse lies slightly proud of it, and starting lower would
+      // drop it a visible step the moment the grave clock ran out.
+      npc._restY ??= ch.root.position.y;
+      ch.root.position.y = npc._restY - sink * 1.3;
+      if (sink >= 1) { npc._grave = 'pending'; this._raiseGrave(npc); }
+    }
+  }
+
+  async _raiseGrave(npc) {
+    const ch = npc.char;
+    const x = ch.root.position.x, z = ch.root.position.z;
+    ch.root.visible = false;
+
+    // Anything still on the body belongs to the grave now.
+    const loot = npc._lootable ?? new Lootable(ch, ch.lootTable(), new THREE.Vector3(x, 0, z));
+    npc._lootable = loot;
+
+    try {
+      const { root } = await assets.prop('gravestone');
+      const cat = PROPS['gravestone'];
+      root.scale.setScalar(cat?.scale ?? 0.58);
+      root.rotation.y = Math.random() * Math.PI * 2;
+      root.rotation.z = (Math.random() - 0.5) * 0.14;     // nothing stands straight for long
+      root.position.set(x, this.terrain.height(x, z), z);
+      root.updateMatrixWorld(true);
+      const box = new THREE.Box3().setFromObject(root);
+      if (Number.isFinite(box.min.y)) root.position.y += root.position.y - box.min.y - 0.06;
+      root.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      root.name = `grave-${npc.id}`;
+      this.stage.scene.add(root);
+      loot.position.set(x, root.position.y + 0.5, z);
+    } catch (err) {
+      console.warn('gravestone failed to load', err);
+    }
+
+    if (!loot.empty) this.lootables.push(loot);
+    npc._grave = 'done';
+  }
+
+  /**
    * Hang a Lootable on every placed chest and fish-rack. Contents are rolled
    * once at load: chests carry coin plus a consumable (sometimes something
    * better); racks carry dried fish.
@@ -527,6 +588,8 @@ export class Game {
 
     for (const npc of this.npcs) {
       const d = npc.position.distanceTo(p);
+      // A buried NPC is gone — its loot lives on the grave marker instead.
+      if (npc.char.dead && npc._grave === 'done') continue;
       if (d < bestD) { bestD = d; best = { kind: npc.char.dead ? 'loot' : 'talk', npc, d }; }
     }
     for (const c of this.creatures) {
@@ -722,6 +785,9 @@ export class Game {
     }
 
     this.stage.update(dt, this.hero.root.position);
+
+    // The fallen sink and leave headstones.
+    if (!this.interior) this._updateGraves(dt);
 
     // Buildings with a far-LOD variant pick their level from the camera here.
     updateLODs(this.stage.camera);
