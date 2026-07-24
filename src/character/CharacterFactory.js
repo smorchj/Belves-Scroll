@@ -490,6 +490,8 @@ const OUTFIT_FILE = {
   'Assassin Armor':   { mars: '_outfit_AssassinArmor_mars' },
   'Woodland Dress':   { venus: '_outfit_WoodlandDress_venus' },
   'Fantasy Woodland Armor': { mars: '_outfit_FantasyWoodlandArmor_mars' },
+  // Norwegian folk costume — the dress-up option for the islands.
+  'Bunad':            { mars: '_outfit_Bunad_mars' },
 };
 
 /** Outfit names available for a base — the creator's outfit picker. */
@@ -664,7 +666,7 @@ export async function conformedHair(style, base, colour, headDisp) {
 export const RECIPES_BY_BASE = {
   venus: ['Maple', 'Willow', 'Ember', 'Kari', 'Mildrid', 'Adala', 'Woodland Huldra'],
   mars: ['Snader', 'Haggar', 'Travis', 'Cedar', 'Pobart', 'Charles',
-         'Cander', 'Makal', 'Roger', 'Woodland Druid'],
+         'Cander', 'Makal', 'Roger', 'Woodland Druid', 'Peder'],
 };
 
 /**
@@ -696,9 +698,18 @@ function texFor(recipe, canon) {
  * skin), while mars takes anything. Geometry is never filtered — a daughter
  * still gets her father's jaw, just not his beard.
  */
+/**
+ * Mars recipes whose skin carries no beard or stubble, so their textures are
+ * safe on a venus body after all. The blanket ban exists only to keep beards
+ * off female faces — a clean-shaven map has nothing to leak, and excluding it
+ * needlessly throws away half of what a mixed-parent blend should inherit.
+ */
+const BEARDLESS_MARS = new Set(['Peder']);
+
 function textureEligible(recipes, base) {
   return recipes
-    .map((r, i) => (base === 'venus' && r.baseMesh === 'mars' ? -1 : i))
+    .map((r, i) => (base === 'venus' && r.baseMesh === 'mars'
+      && !BEARDLESS_MARS.has(r.character?.name) ? -1 : i))
     .filter((i) => i !== -1);
 }
 

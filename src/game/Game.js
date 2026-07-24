@@ -720,9 +720,9 @@ export class Game {
     // Waking up indoors after dying on a mountain would leave the interior
     // holding the stage with nobody in it.
     if (this.interior) await this._leaveInterior();
-    this.hero.dead = false;
-    this.hero.hp = this.hero.maxHp;
-    this.hero.animator.action = null;
+    // revive() also clears the death topple off the root — without it you wake
+    // up still lying at 90° and swim across the ground on your face.
+    this.hero.revive();
     this.player.spawnAt(...this._startPoint());
     this._prevPos.copy(this.player.position);
     this.ui.toast('Recovered', 'You wake on the Havnstad quay, poorer and sorer.');

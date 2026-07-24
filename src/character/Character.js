@@ -361,6 +361,13 @@ export class Character {
     this.disableFace();
   }
 
+  /** Back on your feet: clears the death pose as well as the flag. */
+  revive() {
+    this.dead = false;
+    this.hp = this.maxHp;
+    this.animator.clearDeath();
+  }
+
   /** Everything a corpse yields — weapons come off the body too. */
   lootTable() {
     const out = this.inventory.map((e) => ({ ...e }));

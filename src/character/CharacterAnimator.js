@@ -181,6 +181,21 @@ export class CharacterAnimator {
     this._runHoldsOn = true;
   }
 
+  /**
+   * Undo everything the death layer wrote. The topple lives on the root's
+   * rotation, which no other layer touches — so without this a revived
+   * character keeps lying at 90° and slides around the ground on their face.
+   */
+  clearDeath() {
+    this._deathT = null;
+    this._deathRoll = null;
+    if (this.action?.type === 'death') this.action = null;
+    const root = this.root;
+    root.rotation.x = 0;
+    root.rotation.z = 0;
+    root.position.y = root.userData.groundY ?? root.position.y;
+  }
+
   /** A-pose arms swing down to rest. Mirrored about the forward axis. */
   _base(rig, right, up, forward) {
     rig.add(BONES.upperArmL, forward, -ARM_REST);
