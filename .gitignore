@@ -1,0 +1,29 @@
+# Dependencies / build
+node_modules/
+dist/
+
+# Raw source assets (2.8 GB of Meshy exports + character GLBs — the processed
+# copies under public/assets are what ship). Regenerate with `npm run assets`.
+assets-src/
+
+# Local Python venv for the one-off TTS pre-generation (tools/gen-voices.py)
+tools/tts-env/
+
+# One-off tool byproducts: verification screenshots, generation state
+tools/*.png
+tools/meshy-state.json
+tools/voicelines.json
+
+# Loose verification screenshots at the repo root (public/assets media is kept)
+/*.png
+/*.jpg
+
+# Local agent / tooling state
+.claude/
+.playwright-mcp/
+tools/*.output
+
+# Editor / OS
+.DS_Store
+*.log
+.vite/

@@ -1,0 +1,92 @@
+<!doctype html>
+<meta charset="utf-8"><title>town view</title>
+<style>body{margin:0;background:#111;color:#ccc;font:12px monospace}canvas{display:block}</style>
+<body>
+<div id="status">building…</div>
+<script type="module">
+const status = document.getElementById('status');
+window.__ready = false;
+const THREE = await import('/node_modules/three/build/three.module.js');
+const { Terrain } = await import('/src/world/Terrain.js');
+const { Settlement } = await import('/src/world/Settlement.js');
+const { Vegetation } = await import('/src/world/Vegetation.js');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(1400, 900);
+renderer.setPixelRatio(1);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x9fb6c9);
+const sun = new THREE.DirectionalLight(0xfff0dd, 2.4);
+sun.position.set(-260, 210, 190);
+scene.add(sun, new THREE.HemisphereLight(0xbcd4ea, 0x3b4038, 1.15));
+
+const terrain = await Terrain.load();
+scene.add(terrain.mesh);
+scene.add(terrain.buildWater());
+
+const s = new Settlement(terrain); await s.build();
+scene.add(s.group);
+const v = new Vegetation(terrain);
+await v.build(s.plan.buildings.map(b => ({ x: b.x, z: b.z, r: 14 })));
+scene.add(v.group);
+
+const R = s.plan.ribbon;
+const mid = R.at(R.length / 2, -10);
+window.__plan = s.plan;
+
+const cam = new THREE.PerspectiveCamera(50, 1400 / 900, 0.5, 6000);
+window.__views = {
+  // straight down on the ribbon
+  plan: () => {
+    const c = new THREE.OrthographicCamera(-420, 420, 270, -270, 1, 3000);
+    c.position.set(mid.x, 600, mid.z);
+    c.up.set(Math.sin((118) * Math.PI / 180), 0, Math.cos(118 * Math.PI / 180));
+    c.lookAt(mid.x, 0, mid.z);
+    return c;
+  },
+  // from the sea, looking at the waterfront along the ribbon
+  sea: () => {
+    const p = R.at(-140, 250);
+    cam.position.set(p.x, 95, p.z);
+    cam.lookAt(R.at(340, -20).x, 15, R.at(340, -20).z);
+    return cam;
+  },
+  // eye level in the street
+  street: () => {
+    const p = R.at(150, 6);
+    cam.position.set(p.x, terrain.height(p.x, p.z) + 1.7, p.z);
+    const q = R.at(430, -4);
+    cam.lookAt(q.x, terrain.height(q.x, q.z) + 2, q.z);
+    return cam;
+  },
+  // the quay
+  quay: () => {
+    const off = s.plan.terraces.at(120, 'quay');
+    const p = R.at(120, off + 26);
+    cam.position.set(p.x, 6, p.z);
+    const q = R.at(330, 0);
+    cam.lookAt(q.x, terrain.height(q.x, q.z) + 4, q.z);
+    return cam;
+  },
+  // wide, from the hillside behind
+  hill: () => {
+    const p = R.at(200, -520);
+    cam.position.set(p.x, terrain.height(p.x, p.z) + 120, p.z);
+    cam.lookAt(R.at(380, 40).x, 0, R.at(380, 40).z);
+    return cam;
+  },
+};
+window.__shoot = (name) => {
+  const c = window.__views[name]();
+  c.updateProjectionMatrix();
+  renderer.render(scene, c);
+  return renderer.domElement.toDataURL('image/png');
+};
+status.textContent = 'ready';
+window.__ready = true;
+</script>

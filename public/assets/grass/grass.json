@@ -1,0 +1,29 @@
+{
+  "cards": [
+    {
+      "name": "dry",
+      "note": "wind-flattened, straw over green",
+      "aspect": 1.868,
+      "coverage": 0.271
+    },
+    {
+      "name": "meadow",
+      "note": "mixed grass and clover, flowering",
+      "aspect": 2.165,
+      "coverage": 0.191
+    },
+    {
+      "name": "lush",
+      "note": "dense upright green blades",
+      "aspect": 2.036,
+      "coverage": 0.234
+    },
+    {
+      "name": "sparse",
+      "note": "tall thin stems, gappy",
+      "aspect": 1.764,
+      "coverage": 0.095
+    }
+  ],
+  "size": 1024
+}

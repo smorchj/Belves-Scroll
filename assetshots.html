@@ -1,0 +1,8 @@
+<!doctype html>
+<meta charset="utf-8"><title>asset shots</title>
+<style>body{margin:0;background:#15181c;color:#ccc;font:12px monospace}canvas{display:block}#status{padding:6px}</style>
+<body>
+<div id="status">loading…</div>
+<!-- Must run before the module: the receiver port is read once at import time. -->
+<script>window.__shotPort = new URLSearchParams(location.search).get('port') || undefined;</script>
+<script type="module" src="/src/asset-shots.js"></script>

@@ -1,0 +1,60 @@
+{
+  "default": "fair",
+  "shades": [
+    {
+      "name": "pale",
+      "head": "pale_head.jpg",
+      "body": "pale_body.jpg",
+      "hex": "#ad8777",
+      "lin": [
+        0.4245,
+        0.24599,
+        0.18701
+      ]
+    },
+    {
+      "name": "fair",
+      "head": "fair_head.jpg",
+      "body": "fair_body.jpg",
+      "hex": "#926e5f",
+      "lin": [
+        0.29354,
+        0.15712,
+        0.11274
+      ]
+    },
+    {
+      "name": "tanned",
+      "head": "tanned_head.jpg",
+      "body": "tanned_body.jpg",
+      "hex": "#715446",
+      "lin": [
+        0.1673,
+        0.08691,
+        0.05902
+      ]
+    },
+    {
+      "name": "brown",
+      "head": "brown_head.jpg",
+      "body": "brown_body.jpg",
+      "hex": "#5c4438",
+      "lin": [
+        0.10565,
+        0.0547,
+        0.03575
+      ]
+    },
+    {
+      "name": "black",
+      "head": "black_head.jpg",
+      "body": "black_body.jpg",
+      "hex": "#402f26",
+      "lin": [
+        0.04707,
+        0.02376,
+        0.01528
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "source": "Kartverket NHM DTM, EPSG:25833",
+  "centre": {
+    "e": 381800,
+    "n": 7323500
+  },
+  "bbox": [
+    380392,
+    7322092,
+    383208,
+    7324908
+  ],
+  "sizeMetres": 2816,
+  "samples": 704,
+  "minElevation": -42,
+  "maxElevation": 56.87089920043945,
+  "scale": 0.0015086732158455705,
+  "metresPerSample": 4,
+  "seaLevel": 0
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<!--
+  Isolated face / lipsync / expression bench.
+
+  The main game loop constantly re-frames the camera and NPCs turn to face the
+  player, which makes verifying a facial pose in-game a fight. This page loads a
+  single character with a locked camera so expressions, visemes and mood can be
+  checked directly.   ->  http://localhost:5173/facetest.html
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Face bench — Belve's Scroll</title>
+  <style>
+    body { margin: 0; background: #14181d; color: #ddd; font: 13px system-ui; overflow: hidden; }
+    canvas { display: block; }
+    #panel { position: fixed; top: 0; left: 0; padding: 10px 14px; background: rgba(0,0,0,.72);
+             max-height: 100vh; overflow: auto; width: 250px; }
+    button { background: #2b3138; color: #ddd; border: 1px solid #444; padding: 4px 8px;
+             margin: 2px; cursor: pointer; font-size: 12px; }
+    button:hover { background: #3a424b; }
+    input[type=range] { width: 100%; }
+    .row { margin: 6px 0; }
+    #status { color: #8fbf4d; font-family: monospace; font-size: 11px; white-space: pre; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="panel">
+    <div class="row"><select id="who"></select></div>
+    <div class="row">
+      <button data-say="The ledger says otherwise, and the ledger is what we have.">speak</button>
+      <button data-say="Who? Oh. Oh, you're the one Hale sent about the boundary stones.">speak 2</button>
+      <button id="stop">stop</button>
+    </div>
+    <div class="row">mood <input id="mood" type="range" min="-1" max="1" step="0.05" value="0"></div>
+    <div class="row">yaw <input id="yaw" type="range" min="-3.14" max="3.14" step="0.02" value="0"></div>
+    <div class="row"><button id="blink">blink</button><button id="wide">all shapes</button></div>
+    <div class="row" id="shapes"></div>
+    <div id="status">loading…</div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { Character } from '/src/character/Character.js';
+    import { faceLibrary } from '/src/character/FaceLibrary.js';
+    import { CHARACTERS } from '/src/data/catalog.js';
+
+    const canvas = document.getElementById('c');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x191e24);
+    const camera = new THREE.PerspectiveCamera(28, innerWidth / innerHeight, 0.01, 50);
+
+    // Three-point light rig so the face reads without the game's sun.
+    const key = new THREE.DirectionalLight(0xfff2e0, 3.2); key.position.set(1.2, 1.6, 2.2);
+    const fill = new THREE.DirectionalLight(0xbcd4ff, 1.0); fill.position.set(-1.8, 0.5, 1.2);
+    const rim = new THREE.DirectionalLight(0xffffff, 2.0); rim.position.set(-0.6, 1.2, -2.2);
+    scene.add(key, fill, rim, new THREE.AmbientLight(0x404a57, 1.1));
+
+    let character = null;
+    const clock = new THREE.Clock();
+    const head = new THREE.Vector3();
+
+    const sel = document.getElementById('who');
+    for (const c of CHARACTERS) sel.appendChild(Object.assign(document.createElement('option'), { value: c, textContent: c }));
+    sel.value = 'mildrid';
+
+    async function load(name) {
+      if (character) scene.remove(character.root);
+      character = await Character.spawn(name, { id: name, name, expressive: 1.2 });
+      scene.add(character.root);
+      await character.enableFace();
+      status();
+    }
+
+    function status() {
+      const f = character?.animator.face;
+      document.getElementById('status').textContent =
+        `shapes: ${f?.targets.size ?? 0}\neyes: ${f?.eyes.length ?? 0}\n`
+        + `jaw ${(f?.get('jawOpen') ?? 0).toFixed(2)}  smile ${(f?.get('mouthSmileLeft') ?? 0).toFixed(2)}\n`
+        + `blink ${(f?.get('eyeBlinkLeft') ?? 0).toFixed(2)}  speaking ${character?.animator.speaking}`;
+    }
+
+    sel.onchange = () => load(sel.value);
+    document.getElementById('mood').oninput = (e) => { if (character) character.animator.mood = +e.target.value; };
+    document.getElementById('yaw').oninput = (e) => { if (character) character.root.rotation.y = +e.target.value; };
+    document.getElementById('blink').onclick = () => { if (character) character.animator.blinkProgress = 0; };
+    document.getElementById('stop').onclick = () => {
+      speechSynthesis?.cancel();
+      if (character) { character.animator.speaking = false; character.lipsync.stop(); }
+    };
+    for (const b of document.querySelectorAll('[data-say]')) {
+      b.onclick = () => character?.say(b.dataset.say);
+    }
+    // Sweep every shape one at a time to eyeball that each one actually moves.
+    document.getElementById('wide').onclick = async () => {
+      const f = character.animator.face;
+      for (const name of f.targets.keys()) {
+        f.clear(); f.set(name, 1);
+        document.getElementById('status').textContent = 'showing: ' + name;
+        await new Promise((r) => setTimeout(r, 320));
+      }
+      f.clear();
+    };
+
+    addEventListener('resize', () => {
+      renderer.setSize(innerWidth, innerHeight);
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    await faceLibrary.load();
+    await load(sel.value);
+
+    (function frame() {
+      requestAnimationFrame(frame);
+      const dt = Math.min(clock.getDelta(), 0.05);
+      if (character) {
+        character.update(dt);
+        character.headPosition(head);
+        const yaw = character.root.rotation.y;
+        camera.position.set(head.x + Math.sin(yaw) * 0.75, head.y + 0.02, head.z + Math.cos(yaw) * 0.75);
+        camera.lookAt(head);
+        status();
+      }
+      renderer.render(scene, camera);
+    })();
+
+    window.__bench = { get character() { return character; }, scene, camera, renderer };
+  </script>
+</body>
+</html>

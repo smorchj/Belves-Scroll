@@ -1,0 +1,57 @@
+<!doctype html>
+<meta charset="utf-8"><title>tint audit</title>
+<body style="font:12px monospace;white-space:pre-wrap;padding:12px"><div id="out"></div>
+<script type="module">
+const out = document.getElementById('out');
+const log = (s)=>{ out.textContent += s + '\n'; };
+window.__done=false;
+try{
+const THREE = await import('/node_modules/three/build/three.module.js');
+const { assets } = await import('/src/core/Assets.js');
+const { Terrain } = await import('/src/world/Terrain.js');
+const { Settlement } = await import('/src/world/Settlement.js');
+const terrain = await Terrain.load();
+const s = new Settlement(terrain); await s.build();
+
+const hsl = {};
+function spread(node){
+  const cols=[];
+  node.traverse(o=>{ if(o.isMesh&&o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{ if(m&&m.color) cols.push(m.color.clone()); }); } });
+  return cols;
+}
+// within-building colour spread AFTER tinting
+log('=== within-building colour spread after tinting ===');
+log('model / role : nMats / distinct / maxChannelSpread / meanSaturation');
+const sats=[];
+for(const b of s.plan.buildings){
+  if(!b.node) continue;
+  const cols=spread(b.node);
+  const uniq=new Set(cols.map(c=>c.getHexString()));
+  let maxSpread=0;
+  for(let i=0;i<cols.length;i++)for(let j=i+1;j<cols.length;j++){
+    maxSpread=Math.max(maxSpread,Math.abs(cols[i].r-cols[j].r),Math.abs(cols[i].g-cols[j].g),Math.abs(cols[i].b-cols[j].b));
+  }
+  const ms = cols.map(c=>{const o={};c.getHSL(o);return o.s;});
+  const meanSat = ms.reduce((a,x)=>a+x,0)/Math.max(1,ms.length);
+  sats.push(meanSat);
+  log(`${(b.model+'/'+b.role).padEnd(30)} ${String(cols.length).padStart(2)} / ${String(uniq.size).padStart(2)} / ${maxSpread.toFixed(3)} / ${meanSat.toFixed(3)}  tint=${b.tint?b.tint.name+'@'+b.tint.strength.toFixed(2):'none'}`);
+}
+sats.sort((a,b)=>a-b);
+log(`\nmean saturation across buildings: p10 ${sats[Math.floor(sats.length*0.1)].toFixed(3)} p50 ${sats[Math.floor(sats.length*0.5)].toFixed(3)} p90 ${sats[Math.floor(sats.length*0.9)].toFixed(3)}`);
+
+// untinted reference: what does the raw asset look like?
+log('\n=== raw asset (untinted) reference ===');
+for(const m of ['house-trad','farmstead','ruins-timber','house-t1']){
+  const inst = await assets.prop(m);
+  const cols = spread(inst.root);
+  let maxSpread=0;
+  for(let i=0;i<cols.length;i++)for(let j=i+1;j<cols.length;j++){
+    maxSpread=Math.max(maxSpread,Math.abs(cols[i].r-cols[j].r),Math.abs(cols[i].g-cols[j].g),Math.abs(cols[i].b-cols[j].b));
+  }
+  log(`${m.padEnd(16)} mats ${cols.length} distinct ${new Set(cols.map(c=>c.getHexString())).size} maxSpread ${maxSpread.toFixed(3)} cols ${cols.map(c=>c.getHexString()).join(',')}`);
+  log(`   hasMap: ${(()=>{let n=0;inst.root.traverse(o=>{if(o.isMesh&&o.material&&(Array.isArray(o.material)?o.material:[o.material]).some(mm=>mm&&mm.map))n++;});return n;})()} meshes with a texture map`);
+}
+log('\nOK');
+}catch(e){ log('ERROR '+(e.stack||e)); }
+window.__done=true;
+</script>

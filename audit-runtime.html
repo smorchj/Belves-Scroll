@@ -1,0 +1,104 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>runtime audit</title>
+<body style="font:13px monospace;white-space:pre-wrap;padding:12px">
+<div id="out">loading…</div>
+<script type="module">
+const out = document.getElementById('out');
+const log = (s) => { out.textContent += '\n' + s; console.log(s); };
+out.textContent = 'start';
+window.__done = false;
+window.__result = {};
+try {
+  const THREE = await import('/node_modules/three/build/three.module.js');
+  const { Terrain } = await import('/src/world/Terrain.js');
+  const { Settlement } = await import('/src/world/Settlement.js');
+  const { Vegetation } = await import('/src/world/Vegetation.js');
+
+  const t0 = performance.now();
+  const terrain = await Terrain.load();
+  log(`terrain loaded ${(performance.now()-t0).toFixed(0)}ms size=${terrain.size} samples=${terrain.samples}`);
+
+  const s = new Settlement(terrain);
+  await s.build();
+  log(`settlement built: plan buildings=${s.plan.buildings.length} colliders=${s.colliders.length} doors=${s.doors.length} anchors=${s.anchors.size}`);
+
+  // how many building records actually got a node?
+  const withNode = s.plan.buildings.filter(b => b.node).length;
+  const missing = s.plan.buildings.filter(b => !b.node).map(b => b.model);
+  log(`buildings with a real mesh: ${withNode}/${s.plan.buildings.length}`);
+  if (missing.length) log(`MISSING MESHES: ${JSON.stringify(missing)}`);
+  const dressWithNode = s.plan.dressing.filter(d => d.node).length;
+  log(`dressing with a real mesh: ${dressWithNode}/${s.plan.dressing.length}`);
+
+  // measured world-space footprints and heights
+  const rows = [];
+  for (const b of s.plan.buildings) {
+    if (!b.node) continue;
+    b.node.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(b.node);
+    rows.push({
+      model: b.model, role: b.role,
+      w: +(box.max.x-box.min.x).toFixed(2),
+      d: +(box.max.z-box.min.z).toFixed(2),
+      h: +(box.max.y-box.min.y).toFixed(2),
+      baseY: +box.min.y.toFixed(2),
+      groundY: +terrain.height(b.x,b.z).toFixed(2),
+      sink: +(box.min.y - terrain.height(b.x,b.z)).toFixed(3),
+    });
+  }
+  window.__result.rows = rows;
+  const hs = rows.map(r=>r.h);
+  log(`building heights: min ${Math.min(...hs)} max ${Math.max(...hs)}`);
+  const sinks = rows.map(r=>r.sink);
+  log(`base-vs-ground offset: min ${Math.min(...sinks).toFixed(3)} max ${Math.max(...sinks).toFixed(3)} (should be ~ -0.02..-0.05)`);
+  const floating = rows.filter(r=>r.sink > 0.1);
+  const buried  = rows.filter(r=>r.sink < -0.6);
+  log(`FLOATING (>0.1m above ground): ${floating.length} ${JSON.stringify(floating.slice(0,5))}`);
+  log(`BURIED (>0.6m into ground): ${buried.length} ${JSON.stringify(buried.slice(0,5))}`);
+
+  // do same-model instances actually differ in material colour?
+  const byModel = {};
+  for (const b of s.plan.buildings) {
+    if (!b.node) continue;
+    (byModel[b.model] ||= []).push(b);
+  }
+  const tintReport = {};
+  for (const [m, list] of Object.entries(byModel)) {
+    if (list.length < 2) continue;
+    const cols = list.map(b => {
+      let c = null;
+      b.node.traverse(o => { if (!c && o.isMesh && o.material && o.material.color) c = o.material.color.getHexString(); });
+      return c;
+    });
+    tintReport[m] = { n: list.length, distinctFirstMatColour: new Set(cols).size, cols };
+  }
+  window.__result.tint = tintReport;
+  log('per-model distinct first-material colours: ' + JSON.stringify(tintReport, null, 1));
+
+  // shared-material leak check: does tinting one building repaint another?
+  const mats = new Set();
+  let meshCount = 0;
+  s.group.traverse(o => { if (o.isMesh) { meshCount++; (Array.isArray(o.material)?o.material:[o.material]).forEach(mm=>mats.add(mm)); } });
+  log(`settlement meshes ${meshCount}, distinct materials ${mats.size}`);
+
+  const v = new Vegetation(terrain);
+  const zones = [];
+  for (const b of s.plan.buildings) zones.push({ x: b.x, z: b.z, r: 14 });
+  await v.build(zones);
+  log(`vegetation built: counts ${JSON.stringify(v.counts)}`);
+  let inst = 0, instMeshes = 0;
+  v.group.traverse(o => { if (o.isInstancedMesh) { instMeshes++; inst += o.count; } });
+  log(`instanced meshes ${instMeshes}, total instances ${inst}`);
+
+  // tree scale sanity in world units
+  const tb = new THREE.Box3().setFromObject(v.group);
+  log(`vegetation bounds y: ${tb.min.y.toFixed(1)} .. ${tb.max.y.toFixed(1)}`);
+
+  log('\nOK');
+} catch (e) {
+  log('ERROR: ' + (e && e.stack || e));
+  window.__result.error = String(e && e.stack || e);
+}
+window.__done = true;
+</script>

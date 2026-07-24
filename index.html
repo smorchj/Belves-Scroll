@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Belve's Scroll</title>
+  <link rel="stylesheet" href="/src/ui/style.css" />
+</head>
+<body>
+  <canvas id="viewport"></canvas>
+  <div id="ui-root"></div>
+  <div id="boot">
+    <div class="boot-inner">
+      <h1>BELVE'S SCROLL</h1>
+      <div class="boot-bar"><div class="boot-fill"></div></div>
+      <p class="boot-status">waking the valley…</p>
+      <p class="boot-credit">Characters by
+        <a href="https://creategamecharacters.ai" target="_blank" rel="noopener">creategamecharacters.ai</a>
+        · props by <a href="https://meshy.ai" target="_blank" rel="noopener">Meshy</a>
+      </p>
+    </div>
+  </div>
+  <!-- Persistent, unobtrusive attribution — the character tech is the point of the demo. -->
+  <a id="cgc-credit" href="https://creategamecharacters.ai" target="_blank" rel="noopener">
+    Characters by creategamecharacters.ai
+  </a>
+  <style>
+    .boot-credit { margin-top: 1.4rem; font-size: 0.82rem; opacity: 0.7; }
+    .boot-credit a { color: #ffd968; text-decoration: none; }
+    .boot-credit a:hover { text-decoration: underline; }
+    #cgc-credit {
+      position: fixed; left: 10px; bottom: 8px; z-index: 40;
+      font: 500 11px/1.4 system-ui, sans-serif; letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.55); text-decoration: none;
+      padding: 3px 7px; border-radius: 5px; background: rgba(0, 0, 0, 0.28);
+      pointer-events: auto; transition: color 0.15s;
+    }
+    #cgc-credit:hover { color: #ffd968; }
+  </style>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

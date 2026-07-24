@@ -1,0 +1,1922 @@
+{
+ "venus": {
+  "file": "_base_venus.glb",
+  "meshes": [
+   {
+    "mesh": "GEO-body_venus",
+    "verts": 9338,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "eyeR",
+    "verts": 626,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "eyeL",
+    "verts": 626,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "GEO-head_venus",
+    "verts": 6162,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 51
+   },
+   {
+    "mesh": "eyelashes",
+    "verts": 480,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "wetlayer",
+    "verts": 266,
+    "attrs": "POSITION,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "eye_shadow",
+    "verts": 102,
+    "attrs": "POSITION,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "teeth",
+    "verts": 7669,
+    "attrs": "POSITION,TEXCOORD_0,JOINTS_0,WEIGHTS_0,NORMAL",
+    "morphs": 7
+   }
+  ],
+  "skins": [
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   }
+  ],
+  "animations": 0,
+  "images": 12,
+  "extensionsUsed": [
+   "KHR_materials_specular"
+  ]
+ },
+ "mars": {
+  "file": "_base_mars.glb",
+  "meshes": [
+   {
+    "mesh": "GEO-body_mars",
+    "verts": 9338,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "eyeR",
+    "verts": 626,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "eyeL",
+    "verts": 626,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "GEO-head_mars",
+    "verts": 6162,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 51
+   },
+   {
+    "mesh": "eyelashes",
+    "verts": 480,
+    "attrs": "POSITION,TEXCOORD_0,NORMAL,JOINTS_0,WEIGHTS_0",
+    "morphs": 0
+   },
+   {
+    "mesh": "Mesh.001",
+    "verts": 7669,
+    "attrs": "POSITION,NORMAL,TEXCOORD_0,JOINTS_0,WEIGHTS_0",
+    "morphs": 7
+   }
+  ],
+  "skins": [
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   },
+   {
+    "joints": 73,
+    "sample": [
+     "Hips",
+     "Spine_01",
+     "Spine_02",
+     "Spine_03",
+     "Spine_04",
+     "Spine_05",
+     "Neck_01",
+     "Neck_02",
+     "…"
+    ]
+   }
+  ],
+  "animations": 0,
+  "images": 14,
+  "extensionsUsed": [
+   "KHR_materials_specular"
+  ]
+ },
+ "recipes": {
+  "Maple": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "venus",
+   "baseUrl": "/api/prepared/venus",
+   "charId": null,
+   "charName": "Maple",
+   "hair": {
+    "style": "MidLengthShag",
+    "color": "#c28b66",
+    "scalpMask": "/_hair/MidLengthShag/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "GEO-body_venus": "image/jpeg 285KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_venus": "image/jpeg 531KB",
+    "eyelashes": "image/png 593KB",
+    "teeth": "image/jpeg 294KB"
+   },
+   "meshes": {
+    "GEO-body_venus": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000627,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000521,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_venus": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5301,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10602,
+      "indices": 5301,
+      "offsets": 15903
+     },
+     "maxOffset": 0.004263,
+     "uvMatch": {
+      "matched": 5301,
+      "missed": 0,
+      "maxUVDist": 5.07e-8
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.00164,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    },
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": true,
+     "baseVerts": 7669,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001014,
+     "uvMatch": null,
+     "indexCheck": {
+      "outOfRange": 0
+     }
+    }
+   }
+  },
+  "Willow": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "venus",
+   "baseUrl": "/api/prepared/venus",
+   "charId": null,
+   "charName": "Willow",
+   "hair": {
+    "style": "MidLengthShag",
+    "color": "#c28b66",
+    "scalpMask": "/_hair/MidLengthShag/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "GEO-body_venus": "image/jpeg 270KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_venus": "image/jpeg 545KB",
+    "eyelashes": "image/png 593KB",
+    "teeth": "image/jpeg 294KB"
+   },
+   "meshes": {
+    "GEO-body_venus": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000568,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000612,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_venus": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5302,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10604,
+      "indices": 5302,
+      "offsets": 15906
+     },
+     "maxOffset": 0.003769,
+     "uvMatch": {
+      "matched": 5302,
+      "missed": 0,
+      "maxUVDist": 5.07e-8
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 450,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 900,
+      "indices": 450,
+      "offsets": 1350
+     },
+     "maxOffset": 0.00163,
+     "uvMatch": {
+      "matched": 450,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    },
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": true,
+     "baseVerts": 7669,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001563,
+     "uvMatch": null,
+     "indexCheck": {
+      "outOfRange": 0
+     }
+    }
+   }
+  },
+  "Ember": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "venus",
+   "baseUrl": "/api/prepared/venus",
+   "charId": null,
+   "charName": "Ember",
+   "hair": {
+    "style": "Quiff",
+    "color": "#201613",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "GEO-body_venus": "image/jpeg 334KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_venus": "image/jpeg 612KB",
+    "eyelashes": "image/png 593KB",
+    "teeth": "image/jpeg 294KB"
+   },
+   "meshes": {
+    "GEO-body_venus": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001145,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001718,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_venus": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5298,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10596,
+      "indices": 5298,
+      "offsets": 15894
+     },
+     "maxOffset": 0.005575,
+     "uvMatch": {
+      "matched": 5298,
+      "missed": 0,
+      "maxUVDist": 5.07e-8
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.002486,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    },
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": true,
+     "baseVerts": 7669,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001214,
+     "uvMatch": null,
+     "indexCheck": {
+      "outOfRange": 0
+     }
+    }
+   }
+  },
+  "Kari": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "venus",
+   "baseUrl": "/api/prepared/venus",
+   "charId": null,
+   "charName": "Kari",
+   "hair": {
+    "style": "MidLengthShag",
+    "color": "#f0bd93",
+    "scalpMask": "/_hair/MidLengthShag/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "GEO-body_venus": "image/jpeg 279KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_venus": "image/jpeg 559KB",
+    "eyelashes": "image/png 593KB",
+    "teeth": "image/jpeg 294KB"
+   },
+   "meshes": {
+    "GEO-body_venus": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.004655,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.004011,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_venus": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5814,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 11628,
+      "indices": 5814,
+      "offsets": 17442
+     },
+     "maxOffset": 0.009119,
+     "uvMatch": {
+      "matched": 5814,
+      "missed": 0,
+      "maxUVDist": 5.07e-8
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.00485,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    },
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": true,
+     "baseVerts": 7669,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.006289,
+     "uvMatch": null,
+     "indexCheck": {
+      "outOfRange": 0
+     }
+    }
+   }
+  },
+  "Mildrid": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "venus",
+   "baseUrl": "/api/prepared/venus",
+   "charId": null,
+   "charName": "Mildrid",
+   "hair": {
+    "style": "Quiff",
+    "color": "#030202",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "GEO-body_venus": "image/jpeg 279KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_venus": "image/jpeg 500KB",
+    "eyelashes": "image/png 593KB",
+    "teeth": "image/jpeg 294KB"
+   },
+   "meshes": {
+    "GEO-body_venus": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001614,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.002166,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_venus": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5299,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10598,
+      "indices": 5299,
+      "offsets": 15897
+     },
+     "maxOffset": 0.005272,
+     "uvMatch": {
+      "matched": 5299,
+      "missed": 0,
+      "maxUVDist": 5.07e-8
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.0027,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    },
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": true,
+     "baseVerts": 7669,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001187,
+     "uvMatch": null,
+     "indexCheck": {
+      "outOfRange": 0
+     }
+    }
+   }
+  },
+  "Snader": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Snader",
+   "hair": {
+    "style": "Quiff",
+    "color": "#6a472f",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 297KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 570KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001974,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001647,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.002041,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5152,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10304,
+      "indices": 5152,
+      "offsets": 15456
+     },
+     "maxOffset": 0.006471,
+     "uvMatch": {
+      "matched": 5152,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.005319,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  },
+  "Haggar": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Haggar",
+   "hair": {
+    "style": "Quiff",
+    "color": "#6a472f",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 255KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 632KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.000958,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000445,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000247,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5151,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10302,
+      "indices": 5151,
+      "offsets": 15453
+     },
+     "maxOffset": 0.004168,
+     "uvMatch": {
+      "matched": 5151,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 458,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 916,
+      "indices": 458,
+      "offsets": 1374
+     },
+     "maxOffset": 0.001545,
+     "uvMatch": {
+      "matched": 458,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  },
+  "Travis": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Travis",
+   "hair": {
+    "style": "Quiff",
+    "color": "#150504",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 314KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 676KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.014481,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.012511,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.012592,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5159,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10318,
+      "indices": 5159,
+      "offsets": 15477
+     },
+     "maxOffset": 0.015043,
+     "uvMatch": {
+      "matched": 5159,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.013687,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  },
+  "Cedar": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Cedar",
+   "hair": {
+    "style": "Quiff",
+    "color": "#030202",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 227KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 536KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.00131,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000528,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.000845,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5150,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10300,
+      "indices": 5150,
+      "offsets": 15450
+     },
+     "maxOffset": 0.004683,
+     "uvMatch": {
+      "matched": 5150,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.002637,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  },
+  "Pobart": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Pobart",
+   "hair": {
+    "style": "Quiff",
+    "color": "#6b6b6b",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 308KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 710KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.001257,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001836,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.002247,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5140,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10280,
+      "indices": 5140,
+      "offsets": 15420
+     },
+     "maxOffset": 0.004396,
+     "uvMatch": {
+      "matched": 5140,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 480,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 960,
+      "indices": 480,
+      "offsets": 1440
+     },
+     "maxOffset": 0.003209,
+     "uvMatch": {
+      "matched": 480,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  },
+  "Charles": {
+   "kind": "character-recipe",
+   "version": 1,
+   "base": "mars",
+   "baseUrl": "/api/prepared/mars",
+   "charId": null,
+   "charName": "Charles",
+   "hair": {
+    "style": "Quiff",
+    "color": "#6b6b6b",
+    "scalpMask": "/_hair/Quiff/scalp_mask.png"
+   },
+   "eyes": {
+    "color": null
+   },
+   "outfit": null,
+   "textures": {
+    "teeth": "image/jpeg 294KB",
+    "GEO-body_mars": "image/jpeg 314KB",
+    "eyeR": "image/jpeg 697KB",
+    "eyeL": "image/jpeg 697KB",
+    "GEO-head_mars": "image/jpeg 654KB",
+    "eyelashes": "image/png 608KB"
+   },
+   "meshes": {
+    "teeth": {
+     "key": "index",
+     "vertexCount": 7669,
+     "movedCount": 7669,
+     "baseFound": false,
+     "arrays": {
+      "uvs": 0,
+      "indices": 7669,
+      "offsets": 23007
+     },
+     "maxOffset": 0.000892,
+     "uvMatch": null
+    },
+    "GEO-body_mars": {
+     "key": "uv",
+     "vertexCount": 9338,
+     "movedCount": 0,
+     "baseFound": true,
+     "baseVerts": 9338,
+     "arrays": {
+      "uvs": 0,
+      "indices": 0,
+      "offsets": 0
+     },
+     "maxOffset": 0,
+     "uvMatch": null
+    },
+    "eyeR": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.001933,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "eyeL": {
+     "key": "uv",
+     "vertexCount": 626,
+     "movedCount": 626,
+     "baseFound": true,
+     "baseVerts": 626,
+     "arrays": {
+      "uvs": 1252,
+      "indices": 626,
+      "offsets": 1878
+     },
+     "maxOffset": 0.002323,
+     "uvMatch": {
+      "matched": 626,
+      "missed": 0,
+      "maxUVDist": 4.47e-8
+     }
+    },
+    "GEO-head_mars": {
+     "key": "uv",
+     "vertexCount": 6162,
+     "movedCount": 5138,
+     "baseFound": true,
+     "baseVerts": 6162,
+     "arrays": {
+      "uvs": 10276,
+      "indices": 5138,
+      "offsets": 15414
+     },
+     "maxOffset": 0.006143,
+     "uvMatch": {
+      "matched": 5138,
+      "missed": 0,
+      "maxUVDist": 5.14e-7
+     }
+    },
+    "eyelashes": {
+     "key": "uv",
+     "vertexCount": 480,
+     "movedCount": 458,
+     "baseFound": true,
+     "baseVerts": 480,
+     "arrays": {
+      "uvs": 916,
+      "indices": 458,
+      "offsets": 1374
+     },
+     "maxOffset": 0.001545,
+     "uvMatch": {
+      "matched": 458,
+      "missed": 0,
+      "maxUVDist": 5.99e-7
+     }
+    }
+   }
+  }
+ },
+ "roundTrip": {
+  "Maple": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "GEO-head_venus": {
+    "mesh": "GEO-head_venus",
+    "maxErr_mm": 0.0097,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "teeth": {
+    "mesh": "teeth",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  },
+  "Willow": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "GEO-head_venus": {
+    "mesh": "GEO-head_venus",
+    "maxErr_mm": 0.0092,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.7344,
+    "meanErr_mm": 0.3014
+   },
+   "teeth": {
+    "mesh": "teeth",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   }
+  },
+  "Ember": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.4123,
+    "meanErr_mm": 0.1353
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.418,
+    "meanErr_mm": 0.1346
+   },
+   "GEO-head_venus": {
+    "mesh": "GEO-head_venus",
+    "maxErr_mm": 5.1433,
+    "meanErr_mm": 0.1563
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 1.0509,
+    "meanErr_mm": 0.2088
+   },
+   "teeth": {
+    "mesh": "teeth",
+    "maxErr_mm": 1.1263,
+    "meanErr_mm": 0.1536
+   }
+  },
+  "Kari": "no raw GLB export to compare",
+  "Mildrid": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "GEO-head_venus": {
+    "mesh": "GEO-head_venus",
+    "maxErr_mm": 0.0087,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "teeth": {
+    "mesh": "teeth",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  },
+  "Snader": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "GEO-head_mars": {
+    "mesh": "GEO-head_mars",
+    "maxErr_mm": 0.0088,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  },
+  "Haggar": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "GEO-head_mars": {
+    "mesh": "GEO-head_mars",
+    "maxErr_mm": 0.0094,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 1.2985,
+    "meanErr_mm": 0.3149
+   }
+  },
+  "Travis": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "GEO-head_mars": {
+    "mesh": "GEO-head_mars",
+    "maxErr_mm": 0.0084,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  },
+  "Cedar": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "GEO-head_mars": {
+    "mesh": "GEO-head_mars",
+    "maxErr_mm": 0.0099,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  },
+  "Pobart": "no raw GLB export to compare",
+  "Charles": {
+   "eyeR": {
+    "mesh": "eyeR",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   },
+   "eyeL": {
+    "mesh": "eyeL",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0003
+   },
+   "GEO-head_mars": {
+    "mesh": "GEO-head_mars",
+    "maxErr_mm": 0.01,
+    "meanErr_mm": 0.0002
+   },
+   "eyelashes": {
+    "mesh": "eyelashes",
+    "maxErr_mm": 0.0005,
+    "meanErr_mm": 0.0002
+   }
+  }
+ }
+}

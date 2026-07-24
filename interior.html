@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Interiors — Belve's Scroll</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #07090c; }
+    canvas { display: block; }
+    #hud {
+      position: fixed; top: 10px; left: 10px; z-index: 10; max-width: 380px;
+      font: 12px ui-monospace, Consolas, monospace; color: #9fb4c7;
+      background: rgba(0,0,0,.72); padding: 10px 12px; line-height: 1.7;
+      border-left: 2px solid #c9a34e;
+    }
+    #hud b { color: #c9a34e; }
+    #report { max-height: 42vh; overflow: auto; margin-top: 6px; }
+    .ok { color: #7fc48a; }
+    .warn { color: #d9b45e; }
+    .error { color: #e0705f; }
+    button {
+      font: 11px ui-monospace, Consolas, monospace; background: #1a2028;
+      color: #9fb4c7; border: 1px solid #38424e; padding: 3px 8px; cursor: pointer;
+    }
+    button.on { border-color: #c9a34e; color: #c9a34e; }
+    input[type=range] { width: 130px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="hud">
+    <div><b>Interiors</b> — shell + dressing audit</div>
+    <div id="rooms"></div>
+    <div>hour <input id="hour" type="range" min="0" max="24" step="0.25" value="14"> <span id="hourv">14:00</span></div>
+    <div><button id="enter">test enter/exit</button> <button id="wire">wireframe</button></div>
+    <div id="stats">loading…</div>
+    <div id="report"></div>
+    <div style="margin-top:6px;opacity:.6">drag orbit · wheel zoom</div>
+  </div>
+  <script type="module" src="/src/interior-preview.js"></script>
+</body>
+</html>

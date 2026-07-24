@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Pose Tool — Belve's Scroll</title>
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    html, body { height: 100%; background: #14171c; color: #e8e2d4; font: 13px/1.4 system-ui, sans-serif; overflow: hidden; }
+    #app { display: flex; height: 100%; }
+    #view { flex: 1; position: relative; }
+    canvas { display: block; }
+    #side { width: 320px; background: #1c2027; border-left: 1px solid #2c333d; overflow-y: auto; padding: 14px; }
+    h2 { font-size: 11px; letter-spacing: 0.2em; color: #c9a34e; text-transform: uppercase; margin: 16px 0 8px; border-bottom: 1px solid #2c333d; padding-bottom: 5px; }
+    h2:first-child { margin-top: 0; }
+    button { background: #262c35; color: #e8e2d4; border: 1px solid #3a434f; padding: 6px 10px; font: inherit; cursor: pointer; border-radius: 3px; }
+    button:hover { background: #313a45; border-color: #c9a34e; }
+    button.on { background: #c9a34e; color: #14171c; border-color: #c9a34e; }
+    .row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
+    .row button { flex: 1; }
+    input[type=text] { background: #0f1216; border: 1px solid #3a434f; color: #e8e2d4; padding: 6px; font: inherit; border-radius: 3px; flex: 1; }
+    .pose { display: flex; gap: 4px; margin-bottom: 4px; align-items: center; }
+    .pose span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pose button { padding: 3px 7px; flex: none; font-size: 11px; }
+    #sel { color: #c9a34e; font-weight: 600; min-height: 18px; }
+    .hint { color: #7a8494; font-size: 11px; margin-bottom: 8px; }
+    #bones { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+    #bones button { font-size: 10px; padding: 4px 2px; }
+    label { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; font-size: 12px; }
+    #status { position: absolute; left: 12px; bottom: 10px; color: #7a8494; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="view"><div id="status">loading…</div></div>
+    <div id="side">
+      <h2>Gizmo</h2>
+      <div class="hint">Click a joint sphere or the sword, then drag the gizmo. Every joint — torso, both arms, both hands, both legs — is posable.</div>
+      <div class="row" id="mode">
+        <button data-mode="rotate" class="on">Rotate</button>
+        <button data-mode="translate">Move</button>
+        <button data-mode="scale">Scale</button>
+      </div>
+      <div class="row" id="space">
+        <button data-space="local" class="on">Local</button>
+        <button data-space="world">World</button>
+      </div>
+      <label><input type="checkbox" id="mirror" /> Mirror L↔R</label>
+      <div id="sel">— nothing selected —</div>
+
+      <h2>Sword</h2>
+      <div class="row" id="sword">
+        <button data-hand="off" class="on">None</button>
+        <button data-hand="L">Left hand</button>
+        <button data-hand="R">Right hand</button>
+      </div>
+
+      <h2>Base</h2>
+      <div class="row" id="cast"></div>
+
+      <h2>Show regions</h2>
+      <div class="row" id="regions"></div>
+
+      <h2>Joints</h2>
+      <div id="bones"></div>
+
+      <h2>Save pose</h2>
+      <div class="row">
+        <input type="text" id="poseName" placeholder="pose name (e.g. sword-oath)" />
+        <button id="save">Save</button>
+      </div>
+      <div id="poses"></div>
+      <div class="row" style="margin-top:8px">
+        <button id="reset">Reset</button>
+        <button id="export">Export JSON</button>
+        <button onclick="document.getElementById('import').click()">Import</button>
+        <input type="file" id="import" accept="application/json" style="display:none" />
+      </div>
+      <div class="hint" style="margin-top:6px">Poses persist in this browser. A pose saves every moved joint as a delta from rest — usable as a grip <i>and</i> as an animation keyframe. Send me the exported JSON and I wire it into the game.</div>
+    </div>
+  </div>
+  <script type="module" src="/src/pose-tool.js"></script>
+</body>
+</html>

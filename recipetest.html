@@ -1,0 +1,29 @@
+<!doctype html>
+<!--
+  Recipe pipeline bench — rebuilds the cast from two prepared base meshes plus
+  per-character recipe JSONs (assets-src/characters/*_recipe.json), instead of
+  per-character GLBs.   ->  http://localhost:5173/recipetest.html
+  ?view=heads frames the faces; default frames the whole lineup.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Recipe bench — Belve's Scroll</title>
+  <style>
+    body { margin: 0; background: #14181d; color: #ddd; font: 13px system-ui; overflow: hidden; }
+    canvas { display: block; }
+    #status { position: fixed; top: 8px; left: 10px; color: #8fbf4d;
+              font-family: monospace; font-size: 12px; white-space: pre; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="status">loading…</div>
+  <div id="ui" style="position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;">
+    <button id="prev" style="font-size:20px;padding:6px 18px;background:#2b3138;color:#ddd;border:1px solid #444;cursor:pointer;">◀</button>
+    <span id="who" style="min-width:180px;text-align:center;font-size:16px;"></span>
+    <button id="next" style="font-size:20px;padding:6px 18px;background:#2b3138;color:#ddd;border:1px solid #444;cursor:pointer;">▶</button>
+  </div>
+  <script type="module" src="/src/recipe-preview.js"></script>
+</body>
+</html>

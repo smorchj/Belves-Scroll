@@ -1,0 +1,272 @@
+:root {
+  --ink: #e8e2d4;
+  --ink-dim: #a49c8a;
+  --gold: #c9a34e;
+  --panel: rgba(18, 16, 14, 0.88);
+  --edge: rgba(201, 163, 78, 0.35);
+  --font: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #05070a;
+  color: var(--ink);
+  font-family: var(--font);
+  user-select: none;
+}
+
+#viewport { display: block; width: 100vw; height: 100vh; }
+
+#ui-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+/* Panels and buttons need clicks; full-screen overlays must never take them.
+   `#ui-root > *` used to re-enable pointer events on everything, including the
+   damage vignette — which covers the whole viewport, so it swallowed every
+   click and pointer lock could never engage. The camera simply would not turn. */
+#ui-root > * { pointer-events: auto; }
+/* Same ID specificity as the rule above, so source order decides and these win.
+   A bare `.damage { pointer-events: none }` loses to `#ui-root > *` and the
+   vignette keeps eating clicks. */
+#ui-root > .damage,
+#ui-root > .reticle,
+#ui-root > .toast-wrap,
+#ui-root > .prompt,
+#ui-root > .hud,
+#ui-root > .clock,
+#ui-root > .hint { pointer-events: none; }
+
+/* ---------------------------------------------------------------- boot */
+
+#boot {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, #16202c 0%, #05070a 70%);
+  z-index: 100;
+  transition: opacity 0.9s ease;
+}
+#boot.gone { opacity: 0; pointer-events: none; }
+
+.boot-inner { text-align: center; width: min(90vw, 480px); }
+.boot-inner h1 {
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  letter-spacing: 0.42em;
+  font-weight: 400;
+  color: var(--gold);
+  text-indent: 0.42em;
+  margin-bottom: 1.8rem;
+  text-shadow: 0 0 28px rgba(201, 163, 78, 0.35);
+}
+.boot-bar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.boot-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, transparent, var(--gold));
+  transition: width 0.35s ease;
+}
+.boot-status {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-dim);
+  text-transform: lowercase;
+}
+
+/* ---------------------------------------------------------------- hud */
+
+.hud {
+  position: fixed;
+  left: 1.6rem;
+  bottom: 1.4rem;
+  width: 240px;
+}
+.bar {
+  height: 9px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  transition: width 0.22s ease;
+}
+.bar.hp > i { background: linear-gradient(90deg, #7d2020, #c4433a); }
+.bar.stam > i { background: linear-gradient(90deg, #4a6b2a, #8fbf4d); }
+.bar.xp > i { background: linear-gradient(90deg, #3a4f7a, #6f97d6); }
+
+.hud-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+}
+
+.clock {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  text-align: right;
+}
+
+/* --------------------------------------------------------- crosshair */
+
+.reticle {
+  position: fixed;
+  left: 50%; top: 50%;
+  width: 5px; height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ----------------------------------------------------------- prompt */
+
+.prompt {
+  position: fixed;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.prompt.show { opacity: 1; }
+.prompt b { color: var(--gold); font-weight: 600; }
+
+/* --------------------------------------------------------- dialogue */
+
+.dialogue {
+  position: fixed;
+  left: 50%;
+  bottom: 4vh;
+  transform: translateX(-50%);
+  width: min(92vw, 780px);
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  padding: 1.3rem 1.6rem 1.1rem;
+  backdrop-filter: blur(6px);
+  display: none;
+}
+.dialogue.open { display: block; }
+.dialogue .who {
+  color: var(--gold);
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+.dialogue .line {
+  font-size: 1.06rem;
+  line-height: 1.6;
+  min-height: 3.2em;
+  color: var(--ink);
+}
+.dialogue .options { margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.7rem; }
+.dialogue .opt {
+  padding: 0.42rem 0.6rem;
+  cursor: pointer;
+  color: var(--ink-dim);
+  font-size: 0.95rem;
+  border-left: 2px solid transparent;
+  transition: all 0.14s ease;
+}
+.dialogue .opt:hover, .dialogue .opt.sel {
+  color: var(--ink);
+  border-left-color: var(--gold);
+  background: rgba(201, 163, 78, 0.07);
+  padding-left: 0.9rem;
+}
+
+/* ---------------------------------------------------------- panels */
+
+.panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 11, 0.94);
+  display: none;
+  grid-template-rows: auto 1fr;
+  padding: 3vh 5vw;
+  backdrop-filter: blur(3px);
+}
+.panel.open { display: grid; }
+.panel h2 {
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--edge);
+  padding-bottom: 0.7rem;
+}
+.panel .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; overflow: auto; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-size: 0.94rem;
+}
+.row:hover { background: rgba(201, 163, 78, 0.08); }
+.row .qty { color: var(--ink-dim); }
+.row.rare { color: #7fb2e8; }
+.row.legendary { color: var(--gold); }
+.row.fine { color: #8fca8f; }
+
+.hint {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.6rem;
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  text-align: right;
+  line-height: 1.7;
+}
+
+.toast-wrap { position: fixed; top: 4.5rem; left: 50%; transform: translateX(-50%); width: min(90vw, 460px); }
+.toast {
+  background: var(--panel);
+  border-left: 2px solid var(--gold);
+  padding: 0.65rem 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  animation: slidein 0.3s ease;
+}
+.toast .t { color: var(--gold); font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; }
+@keyframes slidein { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+.damage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 140px rgba(140, 20, 20, 0);
+  transition: box-shadow 0.25s ease;
+}
+.damage.hit { box-shadow: inset 0 0 140px rgba(140, 20, 20, 0.75); }
