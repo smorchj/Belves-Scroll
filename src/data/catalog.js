@@ -228,7 +228,10 @@ export const CHARACTERS = [
 
 /** Skin shades available in the character creator, per base mesh. */
 export const SKIN_SHADES = ['pale', 'fair', 'tanned', 'brown', 'black'];
-export const HAIR_STYLES = [null, 'Quiff', 'MidLengthShag'];
+// Pulled from the site's static /_hair/<Style>/ set. LowBraid and LongerBob
+// ship without a scalp_mask.png, so they skip the scalp darkening — the loader
+// tolerates that rather than binding a white (= mask everything) texture.
+export const HAIR_STYLES = [null, 'Quiff', 'MidLengthShag', 'LowBraid', 'LongerBob'];
 
 /** Assets deliberately excluded, so the reason isn't rediscovered later. */
 export const EXCLUDED = {
