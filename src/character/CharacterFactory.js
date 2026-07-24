@@ -326,11 +326,20 @@ export async function loadHair(style, base) {
   if (_hair.has(key)) return _hair.get(key);
   const p = (async () => {
     const dir = `${import.meta.env.BASE_URL}assets/hairsrc/${style}`;
-    const [gltf, mh, scalp] = await Promise.all([
-      assets.load(`${dir}/${style}.${base}.glb`),
-      fetch(`${dir}/mh_materials.json`).then((r) => r.json()),
-      fetch(`${dir}/scalp.json`).then((r) => r.json()).catch(() => ({ darken: 0.55 })),
-    ]);
+    // A recipe can name a style this build doesn't ship (the site has more
+    // hair than we've pulled down). That must cost the character their hair,
+    // not their existence — an unguarded reject here failed the whole build.
+    let gltf, mh, scalp;
+    try {
+      [gltf, mh, scalp] = await Promise.all([
+        assets.load(`${dir}/${style}.${base}.glb`),
+        fetch(`${dir}/mh_materials.json`).then((r) => r.json()),
+        fetch(`${dir}/scalp.json`).then((r) => r.json()).catch(() => ({ darken: 0.55 })),
+      ]);
+    } catch {
+      console.warn(`[hair] style '${style}' not installed for ${base} — building bald`);
+      return { geo: null, style, base };
+    }
     let geo = null;
     gltf.scene.traverse((o) => { if (o.isMesh && !geo) geo = o.geometry; });
     const params = mh.materials?.[0]?.params ?? {};
@@ -664,9 +673,10 @@ export async function conformedHair(style, base, colour, headDisp) {
 
 /** The named cast recipes on disk, per base — the creator's heritage parents. */
 export const RECIPES_BY_BASE = {
-  venus: ['Maple', 'Willow', 'Ember', 'Kari', 'Mildrid', 'Adala', 'Woodland Huldra'],
+  venus: ['Maple', 'Willow', 'Ember', 'Kari', 'Mildrid', 'Adala', 'Woodland Huldra',
+          'Peble', 'Kristine'],
   mars: ['Snader', 'Haggar', 'Travis', 'Cedar', 'Pobart', 'Charles',
-         'Cander', 'Makal', 'Roger', 'Woodland Druid', 'Peder'],
+         'Cander', 'Makal', 'Roger', 'Woodland Druid', 'Peder', 'Hans'],
 };
 
 /**
@@ -704,7 +714,7 @@ function texFor(recipe, canon) {
  * off female faces — a clean-shaven map has nothing to leak, and excluding it
  * needlessly throws away half of what a mixed-parent blend should inherit.
  */
-const BEARDLESS_MARS = new Set(['Peder']);
+const BEARDLESS_MARS = new Set(['Peder', 'Hans']);
 
 function textureEligible(recipes, base) {
   return recipes
